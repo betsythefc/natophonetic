@@ -1,2 +1,2 @@
 # natophonetic
-Bash scrit that converts input into nato phonetic spelling
+Bash script that converts input into nato phonetic spelling
