@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+input=$1
+if [[ "$input" == "" ]]
+then
+  input=$(cat)
+fi
+
+function nato_phonetic_bash_three {
+  letter=$1
+  alphabet=('a=alpha' 'b=bravo' 'c=charlie' 'd=delta' 'e=echo' 'f=foxtrot' 'g=golf' 'h=hotel' 'i=india' 'j=juliett' 'k=kilo' 'l=lima' 'm=mike' 'n=november' 'o=oscar' 'p=papa' 'q=quebec' 'r=romeo' 's=sierra' 't=tango' 'u=uniform' 'v=victor' 'w=whiskey' 'x=xray' 'y=yankee' 'z=zulu')
+  for character in ${alphabet[@]}
+  do
+    npKey=$(echo $character | cut -d'=' -f1)
+    npVal=$(echo $character | cut -d'=' -f2)
+    if [[ "$letter" == "$npKey" ]]
+    then
+      echo -e "$npKey\t|\t$npVal"
+    fi 
+  done
+}
+
+function nato_phonetic_bash_four {
+  letter=$1
+  alphabet=(['a']='alpha' ['b']='bravo' ['c']='charlie' ['d']='delta' ['e']='echo' ['f']='foxtrot' ['g']='golf' ['h']='hotel' ['i']='india' ['j']='juliett' ['k']='kilo' ['l']='lima' ['m']='mike' ['n']='november' ['o']='oscar' ['p']='papa' ['q']='quebec' ['r']='romeo' ['s']='sierra' ['t']='tango' ['u']='uniform' ['v']='victor' ['w']='whiskey' ['x']='xray' ['y']='yankee' ['z']='zulu')
+  echo -e "$letter\t|\t${alphabet[$letter]}"
+}
+
+case $(bash --version | grep "version" | cut -d' ' -f4 | cut -d'.' -f1) in
+  3) for i in $(echo $input | grep -o .)
+     do
+       nato_phonetic_bash_three $i
+     done
+  ;;
+  4) for i in $(echo $input | grep -o .)
+     do
+       nato_phonetic_bash_four $i
+     done
+  ;;
+esac
