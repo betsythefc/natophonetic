@@ -22,11 +22,13 @@ function nato_phonetic_bash_three {
 
 function nato_phonetic_bash_four {
   letter=$1
+  unset alphabet
+  declare -A alphabet
   alphabet=(['a']='alpha' ['b']='bravo' ['c']='charlie' ['d']='delta' ['e']='echo' ['f']='foxtrot' ['g']='golf' ['h']='hotel' ['i']='india' ['j']='juliett' ['k']='kilo' ['l']='lima' ['m']='mike' ['n']='november' ['o']='oscar' ['p']='papa' ['q']='quebec' ['r']='romeo' ['s']='sierra' ['t']='tango' ['u']='uniform' ['v']='victor' ['w']='whiskey' ['x']='xray' ['y']='yankee' ['z']='zulu')
   echo -e "$letter\t|\t${alphabet[$letter]}"
 }
 
-case $(bash --version | grep "version" | cut -d' ' -f4 | cut -d'.' -f1) in
+case $(bash --version | grep "version" | cut -d' ' -f4 | cut -d'.' -f1 | head -1) in
   3) for i in $(echo $input | grep -o .)
      do
        nato_phonetic_bash_three $i
